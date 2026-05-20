@@ -1,4 +1,4 @@
-import { createSwaggerHtml } from '../utils/swagger.util'
+import { createSwaggerHtml } from '../../utils/swagger.util'
 
 export default defineEventHandler(() => {
   return new Response(createSwaggerHtml(), {

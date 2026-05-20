@@ -1,4 +1,4 @@
-import { createHealthResponse } from '../services/health.service'
+import { createHealthResponse } from '../../services/health.service'
 
 export default defineEventHandler(() => {
   const config = useRuntimeConfig()

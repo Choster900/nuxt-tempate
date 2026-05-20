@@ -5,7 +5,7 @@ export default <RouterConfig>{
     {
       name: 'index',
       path: '/',
-      component: () => import('~/presentation/view/index.vue'),
+      component: () => import('~/presentation/landing/view/index.vue'),
     },
   ],
 }

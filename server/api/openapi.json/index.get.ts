@@ -1,4 +1,4 @@
-import { createOpenApiSpec } from '../utils/swagger.util'
+import { createOpenApiSpec } from '../../utils/swagger.util'
 
 export default defineEventHandler(() => {
   const config = useRuntimeConfig()

@@ -42,7 +42,7 @@ Base modular para aplicaciones full-stack con Nuxt/Nitro. Incluye pantalla inici
 │  │  ├─ auth/
 │  │  ├─ register/
 │  │  ├─ landing/
-│  │  └─ view/
+│  │  └─ ...
 │  ├─ interfaces/
 │  ├─ layouts/
 │  ├─ middleware/
@@ -59,6 +59,9 @@ Base modular para aplicaciones full-stack con Nuxt/Nitro. Incluye pantalla inici
 │  └─ seed/
 ├─ server/
 │  ├─ api/
+│  │  ├─ healthcheck/index.get.ts
+│  │  ├─ docs/index.get.ts
+│  │  └─ openapi.json/index.get.ts
 │  ├─ database/
 │  ├─ services/
 │  ├─ repositories/
@@ -71,18 +74,13 @@ Base modular para aplicaciones full-stack con Nuxt/Nitro. Incluye pantalla inici
 ## 4) Convenciones para nombrar rutas
 
 ```txt
-app/presentation/view/
+app/presentation/<feature-name>/view/
   index.vue
-  auth/
-    login.vue
-    register.vue
-  dashboard/
-    index.vue
 ```
 
-- Rutas públicas en `app/presentation/view`.
+- Cada vista de ruta vive dentro de su módulo en `app/presentation/<feature-name>/view`.
 - Rutas protegidas con middleware en `app/middleware`.
-- Evitar lógica compleja en vistas de ruta; moverla a `app/presentation/*`.
+- El mapeo de rutas se centraliza en `app/router.options.ts`.
 
 ## 5) Convenciones para módulos presentation
 
