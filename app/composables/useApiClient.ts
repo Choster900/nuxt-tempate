@@ -1,11 +1,5 @@
-import { httpClient } from '@services/http/http-client'
+import { useNuxtApp } from '#imports'
 
 export function useApiClient() {
-  return {
-    get: httpClient.get,
-    post: httpClient.post,
-    put: httpClient.put,
-    patch: httpClient.patch,
-    delete: httpClient.delete,
-  }
+  return useNuxtApp().$apiClient
 }

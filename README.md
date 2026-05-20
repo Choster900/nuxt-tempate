@@ -13,9 +13,11 @@ Base modular para aplicaciones full-stack con Nuxt/Nitro. Incluye pantalla inici
 - Tailwind CSS
 - Pinia (`@pinia/nuxt`)
 - TanStack Query (`@tanstack/vue-query`)
+- Axios (cliente HTTP con interceptores)
 - Prisma ORM
 - PostgreSQL (Supabase)
 - Joi (validación de entorno)
+- Swagger UI + OpenAPI 3
 - Docker + Docker Compose
 - ESLint + Prettier + EditorConfig
 
@@ -82,7 +84,7 @@ app/presentation/view/
 - Rutas protegidas con middleware en `app/middleware`.
 - Evitar lógica compleja en vistas de ruta; moverla a `app/presentation/*`.
 
-## 5) Convenciones para módulos/features
+## 5) Convenciones para módulos presentation
 
 Cada módulo vive en `app/presentation/<feature-name>/` con:
 
@@ -124,6 +126,7 @@ DIRECT_URL=
 SUPABASE_URL=
 SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
+PORT=
 NUXT_PUBLIC_APP_NAME=
 NUXT_PUBLIC_APP_URL=
 NODE_ENV=
@@ -158,6 +161,18 @@ Copy-Item .env.example .env
 npm run dev
 ```
 
+`npm run dev` usa el puerto definido en `PORT`.
+Ejemplo:
+
+```bash
+# Linux/macOS
+PORT=4000 npm run dev
+# PowerShell
+$env:PORT=4000; npm run dev
+```
+
+Si `NUXT_PUBLIC_APP_URL` está vacío, se resuelve automáticamente como `http://127.0.0.1:${PORT}`.
+
 ## 13) Ejecutar con Docker (desarrollo)
 
 ```bash
@@ -183,6 +198,8 @@ node .output/server/index.mjs
 docker compose -f docker-compose.prod.yml up --build
 ```
 
+La imagen de producción usa build args desde `.env` para pasar variables requeridas en el `nuxt build`.
+
 ## 16) Migraciones Prisma
 
 ```bash
@@ -199,6 +216,33 @@ npx prisma generate
 - Evitar exponer secretos en `runtimeConfig.public`.
 - Usar `DIRECT_URL` para migraciones y `DATABASE_URL` para runtime.
 - Mantener imágenes Docker pequeñas y reproducibles con `npm ci`.
+
+## 18) Swagger y healthcheck
+
+- Swagger UI: `GET /api/docs`
+- OpenAPI JSON: `GET /api/openapi.json`
+- Healthcheck: `GET /api/healthcheck`
+- La vista `Hola mundo` consume `healthcheck` con TanStack Query.
+
+## 19) Estructura Axios
+
+```txt
+app/services/http/axios/
+  constants/
+  interfaces/
+  interceptors/
+  utils/
+  create-axios-client.ts
+  index.ts
+```
+
+- Inyección global vía plugin: `app/plugins/api-client.ts` (`$apiClient`)
+- Interceptores incluidos:
+  - request id (`x-request-id`)
+  - headers por defecto (`accept/content-type`)
+  - auth bearer opcional por cookie `access_token`
+  - normalización de errores
+  - logging en desarrollo
 
 ## Scripts disponibles
 

@@ -6,6 +6,10 @@ const env = validateEnv()
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@nuxt/eslint'],
   devtools: { enabled: true },
+  devServer: {
+    host: '0.0.0.0',
+    port: env.PORT,
+  },
   app: {
     head: {
       title: env.NUXT_PUBLIC_APP_NAME,
