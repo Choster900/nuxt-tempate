@@ -1,5 +1,5 @@
 import type { AxiosInstance } from 'axios'
-import type { HttpClientContext } from '../interfaces/http-client-context.interface'
+import type { HttpClientContext } from '~/shared/interfaces/http/http-client-context.interface'
 import { createAuthTokenInterceptor } from './auth-token.interceptor'
 import { applyDefaultHeadersInterceptor } from './default-headers.interceptor'
 import {

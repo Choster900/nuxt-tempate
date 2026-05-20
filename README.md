@@ -34,8 +34,6 @@ Base modular para aplicaciones full-stack con Nuxt/Nitro. Incluye pantalla inici
 │  │     ├─ themes/dark/
 │  │     ├─ themes/light/
 │  │     └─ tailwind/
-│  ├─ components/
-│  ├─ composables/
 │  ├─ config/
 │  ├─ constants/
 │  ├─ presentation/
@@ -43,11 +41,14 @@ Base modular para aplicaciones full-stack con Nuxt/Nitro. Incluye pantalla inici
 │  │  ├─ register/
 │  │  ├─ landing/
 │  │  └─ ...
-│  ├─ interfaces/
 │  ├─ layouts/
 │  ├─ middleware/
 │  ├─ plugins/
 │  ├─ services/
+│  ├─ shared/
+│  │  ├─ components/
+│  │  ├─ composables/
+│  │  └─ interfaces/
 │  ├─ stores/
 │  ├─ types/
 │  └─ utils/
@@ -97,14 +98,14 @@ Cada módulo vive en `app/presentation/<feature-name>/` con:
 
 ## 6) Convenciones para componentes
 
-- Compartidos globales en `app/components`.
+- Compartidos globales en `app/shared/components`.
 - Específicos de dominio dentro de su módulo.
 - Nombrado PascalCase (`AuthLoginForm.vue`).
 
 ## 7) Convenciones para interfaces y tipos
 
 - Tipos globales en `app/types`.
-- Interfaces compartidas de contrato en `app/interfaces`.
+- Interfaces compartidas de contrato en `app/shared/interfaces`.
 - Interfaces de dominio dentro de cada módulo.
 
 ## 8) Convenciones para servicios y repositorios
@@ -203,6 +204,7 @@ La imagen de producción usa build args desde `.env` para pasar variables requer
 ```bash
 npx prisma migrate dev
 npx prisma generate
+npx prisma db seed
 ```
 
 ## 17) Recomendaciones para escalar
@@ -226,12 +228,15 @@ npx prisma generate
 
 ```txt
 app/services/http/axios/
-  constants/
-  interfaces/
   interceptors/
-  utils/
   create-axios-client.ts
   index.ts
+```
+
+```txt
+app/constants/http/
+app/shared/interfaces/http/
+app/utils/http/
 ```
 
 - Inyección global vía plugin: `app/plugins/api-client.ts` (`$apiClient`)
@@ -255,6 +260,7 @@ npm run prepare
 npm run nuxt:prepare
 npm run prisma:generate
 npm run prisma:migrate
+npm run prisma:seed
 npm run prisma:studio
 ```
 

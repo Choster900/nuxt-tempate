@@ -6,10 +6,6 @@ const env = validateEnv()
 export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@nuxt/eslint'],
   devtools: { enabled: true },
-  devServer: {
-    host: '0.0.0.0',
-    port: env.PORT,
-  },
   app: {
     head: {
       title: env.NUXT_PUBLIC_APP_NAME,
@@ -34,11 +30,16 @@ export default defineNuxtConfig({
   },
   alias: {
     '@presentation': '/app/presentation',
-    '@interfaces': '/app/interfaces',
+    '@shared': '/app/shared',
+    '@interfaces': '/app/shared/interfaces',
     '@types': '/app/types',
     '@utils': '/app/utils',
     '@constants': '/app/constants',
     '@services': '/app/services',
+  },
+  devServer: {
+    host: '0.0.0.0',
+    port: env.PORT,
   },
   compatibilityDate: '2025-07-15',
   tailwindcss: {

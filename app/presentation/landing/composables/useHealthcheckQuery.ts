@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/vue-query'
-import { useApiClient } from '~/composables/useApiClient'
+import { useApiClient } from '~/shared/composables/useApiClient'
 import { queryKeys } from '~/constants/query-keys'
 import { getHealthcheck } from '../services/healthcheck.service'
 
