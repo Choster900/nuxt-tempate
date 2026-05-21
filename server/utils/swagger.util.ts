@@ -1,71 +1,71 @@
 interface SwaggerOptions {
-  appName: string
-  appUrl: string
+    appName: string
+    appUrl: string
 }
 
 export function createOpenApiSpec({ appName, appUrl }: SwaggerOptions) {
-  return {
-    openapi: '3.0.3',
-    info: {
-      title: `${appName} API`,
-      version: '1.0.0',
-      description: 'API documentation generated for Nuxt/Nitro server routes.',
-    },
-    servers: [
-      {
-        url: appUrl,
-      },
-    ],
-    tags: [
-      {
-        name: 'Health',
-        description: 'Health check endpoints',
-      },
-      {
-        name: 'Documentation',
-        description: 'OpenAPI and Swagger UI endpoints',
-      },
-    ],
-    paths: {
-      '/api/healthcheck': {
-        get: {
-          tags: ['Health'],
-          summary: 'Service health endpoint',
-          responses: {
-            200: {
-              description: 'Service is healthy',
-            },
-          },
+    return {
+        openapi: '3.0.3',
+        info: {
+            title: `${appName} API`,
+            version: '1.0.0',
+            description: 'API documentation generated for Nuxt/Nitro server routes.',
         },
-      },
-      '/api/openapi.json': {
-        get: {
-          tags: ['Documentation'],
-          summary: 'OpenAPI JSON specification',
-          responses: {
-            200: {
-              description: 'OpenAPI specification payload',
+        servers: [
+            {
+                url: appUrl,
             },
-          },
-        },
-      },
-      '/api/docs': {
-        get: {
-          tags: ['Documentation'],
-          summary: 'Swagger UI',
-          responses: {
-            200: {
-              description: 'Swagger UI HTML',
+        ],
+        tags: [
+            {
+                name: 'Health',
+                description: 'Health check endpoints',
             },
-          },
+            {
+                name: 'Documentation',
+                description: 'OpenAPI and Swagger UI endpoints',
+            },
+        ],
+        paths: {
+            '/api/healthcheck': {
+                get: {
+                    tags: ['Health'],
+                    summary: 'Service health endpoint',
+                    responses: {
+                        200: {
+                            description: 'Service is healthy',
+                        },
+                    },
+                },
+            },
+            '/api/openapi.json': {
+                get: {
+                    tags: ['Documentation'],
+                    summary: 'OpenAPI JSON specification',
+                    responses: {
+                        200: {
+                            description: 'OpenAPI specification payload',
+                        },
+                    },
+                },
+            },
+            '/api/docs': {
+                get: {
+                    tags: ['Documentation'],
+                    summary: 'Swagger UI',
+                    responses: {
+                        200: {
+                            description: 'Swagger UI HTML',
+                        },
+                    },
+                },
+            },
         },
-      },
-    },
-  }
+    }
 }
 
 export function createSwaggerHtml() {
-  return `<!DOCTYPE html>
+    return `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

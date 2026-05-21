@@ -241,11 +241,11 @@ app/utils/http/
 
 - Inyección global vía plugin: `app/plugins/api-client.ts` (`$apiClient`)
 - Interceptores incluidos:
-  - request id (`x-request-id`)
-  - headers por defecto (`accept/content-type`)
-  - auth bearer opcional por cookie `access_token`
-  - normalización de errores
-  - logging en desarrollo
+    - request id (`x-request-id`)
+    - headers por defecto (`accept/content-type`)
+    - auth bearer opcional por cookie `access_token`
+    - normalización de errores
+    - logging en desarrollo
 
 ## Scripts disponibles
 

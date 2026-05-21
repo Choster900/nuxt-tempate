@@ -3,17 +3,17 @@ import type { HttpClientContext } from '~/shared/interfaces/http/http-client-con
 import { createAuthTokenInterceptor } from './auth-token.interceptor'
 import { applyDefaultHeadersInterceptor } from './default-headers.interceptor'
 import {
-  createDevRequestLoggerInterceptor,
-  createDevResponseLoggerInterceptor,
+    createDevRequestLoggerInterceptor,
+    createDevResponseLoggerInterceptor,
 } from './dev-logger.interceptor'
 import { applyRequestIdInterceptor } from './request-id.interceptor'
 import { createResponseErrorInterceptor } from './response-error.interceptor'
 
 export function registerAxiosInterceptors(client: AxiosInstance, context: HttpClientContext) {
-  client.interceptors.request.use(applyRequestIdInterceptor)
-  client.interceptors.request.use(applyDefaultHeadersInterceptor)
-  client.interceptors.request.use(createAuthTokenInterceptor(context))
-  client.interceptors.request.use(createDevRequestLoggerInterceptor(context.isDev))
-  client.interceptors.response.use(createDevResponseLoggerInterceptor(context.isDev))
-  client.interceptors.response.use(undefined, createResponseErrorInterceptor(context.isDev))
+    client.interceptors.request.use(applyRequestIdInterceptor)
+    client.interceptors.request.use(applyDefaultHeadersInterceptor)
+    client.interceptors.request.use(createAuthTokenInterceptor(context))
+    client.interceptors.request.use(createDevRequestLoggerInterceptor(context.isDev))
+    client.interceptors.response.use(createDevResponseLoggerInterceptor(context.isDev))
+    client.interceptors.response.use(undefined, createResponseErrorInterceptor(context.isDev))
 }

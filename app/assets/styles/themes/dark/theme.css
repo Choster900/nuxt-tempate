@@ -1,13 +1,13 @@
 .dark {
-  color-scheme: dark;
-  --app-bg: 2 6 23;
-  --app-fg: 226 232 240;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) {
     color-scheme: dark;
     --app-bg: 2 6 23;
     --app-fg: 226 232 240;
-  }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+        color-scheme: dark;
+        --app-bg: 2 6 23;
+        --app-fg: 226 232 240;
+    }
 }

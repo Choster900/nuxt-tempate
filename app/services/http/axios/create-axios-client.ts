@@ -4,11 +4,11 @@ import type { HttpClientContext } from '~/shared/interfaces/http/http-client-con
 import { registerAxiosInterceptors } from './interceptors/register-axios-interceptors'
 
 export function createAxiosClient(context: HttpClientContext) {
-  const client = axios.create({
-    baseURL: context.baseURL,
-    timeout: context.timeout || HTTP_TIMEOUT_MS,
-  })
+    const client = axios.create({
+        baseURL: context.baseURL,
+        timeout: context.timeout || HTTP_TIMEOUT_MS,
+    })
 
-  registerAxiosInterceptors(client, context)
-  return client
+    registerAxiosInterceptors(client, context)
+    return client
 }
