@@ -12,10 +12,6 @@ export function createResponseErrorInterceptor(isDev: boolean) {
             endpoint: error.config?.url,
         }
 
-        if (isDev) {
-            console.error('[HTTP_ERROR]', normalizedError)
-        }
-
         return Promise.reject(normalizedError)
     }
 }

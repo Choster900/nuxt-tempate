@@ -9,12 +9,20 @@ export default defineNuxtConfig({
     app: {
         head: {
             title: env.NUXT_PUBLIC_APP_NAME,
+            script: [
+                {
+                    key: 'theme-mode-init',
+                    tagPriority: 'critical',
+                    innerHTML: `(function(){try{var stored=localStorage.getItem('app-theme-mode');var mode=(stored==='light'||stored==='dark')?stored:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var root=document.documentElement;root.classList.toggle('dark',mode==='dark');root.classList.toggle('light',mode==='light');}catch(e){}})();`,
+                },
+            ],
         },
     },
     css: [
         '~/assets/styles/base/globals.css',
         '~/assets/styles/themes/light/theme.css',
         '~/assets/styles/themes/dark/theme.css',
+        'vue-sonner/style.css',
         '~/assets/styles/tailwind/main.css',
     ],
     runtimeConfig: {
@@ -24,6 +32,7 @@ export default defineNuxtConfig({
         public: {
             appName: env.NUXT_PUBLIC_APP_NAME,
             appUrl: env.NUXT_PUBLIC_APP_URL,
+            apiUrl: env.NUXT_PUBLIC_API_URL,
             supabaseUrl: env.SUPABASE_URL,
             supabaseAnonKey: env.SUPABASE_ANON_KEY,
         },

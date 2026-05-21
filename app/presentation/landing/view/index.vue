@@ -28,12 +28,22 @@
 
 <script setup lang="ts">
 import { useHealthcheckQuery } from '~/presentation/landing/composables/useHealthcheckQuery'
+import { useAppToast } from '~/presentation/shared/composables/useAppToast'
 import { useThemeMode } from '~/presentation/shared/composables/useThemeMode'
 
 defineOptions({
     name: 'HomePage',
 })
 
-const { data, isPending, isError } = useHealthcheckQuery()
+const { data, isPending, isError, refetch } = useHealthcheckQuery({ enabled: false })
 const { mode, toggleMode } = useThemeMode()
+const toast = useAppToast()
+
+onMounted(() => {
+    toast.promise(refetch({ throwOnError: true }), {
+        loading: 'Procesando...',
+        success: () => 'Completado',
+        error: () => 'Falló',
+    })
+})
 </script>

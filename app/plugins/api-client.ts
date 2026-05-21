@@ -3,9 +3,14 @@ import { createAxiosClient, buildApiBaseUrl, HTTP_TIMEOUT_MS } from '~/infrastru
 export default defineNuxtPlugin(() => {
     const runtimeConfig = useRuntimeConfig()
     const accessToken = useCookie<string | null>('access_token')
+    const requestUrl = import.meta.server ? useRequestURL() : null
 
     const apiClient = createAxiosClient({
-        baseURL: buildApiBaseUrl(runtimeConfig.public.appUrl),
+        baseURL: buildApiBaseUrl({
+            apiUrl: runtimeConfig.public.apiUrl,
+            appUrl: runtimeConfig.public.appUrl,
+            requestOrigin: requestUrl?.origin,
+        }),
         timeout: HTTP_TIMEOUT_MS,
         isDev: import.meta.dev,
         getAuthToken: () => accessToken.value,

@@ -9,6 +9,7 @@ export interface AppEnv {
     PORT: number
     NUXT_PUBLIC_APP_NAME: string
     NUXT_PUBLIC_APP_URL: string
+    NUXT_PUBLIC_API_URL: string
     NODE_ENV: 'development' | 'production' | 'test'
 }
 
@@ -27,6 +28,11 @@ const envSchema = Joi.object<AppEnv>({
     PORT: Joi.number().integer().min(1).max(65535).default(3000),
     NUXT_PUBLIC_APP_NAME: Joi.string().min(1).required(),
     NUXT_PUBLIC_APP_URL: Joi.string()
+        .trim()
+        .uri({ scheme: ['http', 'https'] })
+        .allow('')
+        .optional(),
+    NUXT_PUBLIC_API_URL: Joi.string()
         .trim()
         .uri({ scheme: ['http', 'https'] })
         .allow('')
@@ -53,9 +59,12 @@ export function validateEnv(): AppEnv {
 
     const resolvedAppUrl =
         String(value.NUXT_PUBLIC_APP_URL || '').trim() || `http://127.0.0.1:${value.PORT}`
+    const resolvedApiUrl = String(value.NUXT_PUBLIC_API_URL || '').trim() || resolvedAppUrl
+
     validatedEnv = {
         ...value,
         NUXT_PUBLIC_APP_URL: resolvedAppUrl,
+        NUXT_PUBLIC_API_URL: resolvedApiUrl,
     } as AppEnv
 
     return validatedEnv
