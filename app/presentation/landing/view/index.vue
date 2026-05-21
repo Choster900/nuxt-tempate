@@ -1,6 +1,16 @@
 <template>
     <main class="flex min-h-screen items-center justify-center px-4">
-        <section class="space-y-3 text-center">
+        <section class="space-y-4 text-center">
+            <div class="flex justify-center">
+                <button
+                    type="button"
+                    class="rounded-full border border-[rgb(var(--app-fg))] px-4 py-2 text-sm font-medium text-[rgb(var(--app-fg))] transition-opacity hover:opacity-80"
+                    @click="toggleMode"
+                >
+                    {{ mode === 'dark' ? 'Modo claro' : 'Modo oscuro' }}
+                </button>
+            </div>
+
             <h1 class="text-3xl font-semibold tracking-normal text-[rgb(var(--app-fg))]">
                 Hola mundo
             </h1>
@@ -18,10 +28,12 @@
 
 <script setup lang="ts">
 import { useHealthcheckQuery } from '~/presentation/landing/composables/useHealthcheckQuery'
+import { useThemeMode } from '~/presentation/shared/composables/useThemeMode'
 
 defineOptions({
     name: 'HomePage',
 })
 
 const { data, isPending, isError } = useHealthcheckQuery()
+const { mode, toggleMode } = useThemeMode()
 </script>

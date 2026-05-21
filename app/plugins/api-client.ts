@@ -1,4 +1,4 @@
-import { createAxiosClient, buildApiBaseUrl, HTTP_TIMEOUT_MS } from '~/services/http/axios'
+import { createAxiosClient, buildApiBaseUrl, HTTP_TIMEOUT_MS } from '~/infrastructure/http/axios'
 
 export default defineNuxtPlugin(() => {
     const runtimeConfig = useRuntimeConfig()
